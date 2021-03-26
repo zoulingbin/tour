@@ -1,31 +1,13 @@
 package main
 
 import (
-	"errors"
-	"flag"
-	"fmt"
+	"github.com/zoulingbin/tour/cmd"
 	"log"
 )
 
-
-type Name string
-
-func (i *Name) Set(value string) error{
-	if len(*i) > 0 {
-		return errors.New("name flag already set")
+func main(){
+	err := cmd.Execute()
+	if err != nil {
+		log.Fatalf("cmd.Execute err: %v\n",err.Error())
 	}
-	*i = Name(value)
-	return nil
-}
-
-func (i *Name) String() string {
-	return fmt.Sprint(*i)
-}
-
-func main()  {
-	var name Name
-	flag.Var(&name,"name","帮助信息")
-	flag.Parse()
-
-	log.Printf("name: %s", name)
 }
