@@ -28,7 +28,7 @@ var wordCmd = &cobra.Command{
 	Use: "word",
 	Short: "单词格式转换",
 	Long: "支持多种单词格式转换",
-	Run: run,
+	Run: wordRun,
 }
 
 var mode int8
@@ -39,7 +39,7 @@ func init() {
 	wordCmd.Flags().Int8VarP(&mode, "mode", "m", 0, "请输入单词转换的模式")
 }
 
-func run(cmd *cobra.Command, args []string) {
+func wordRun(cmd *cobra.Command, args []string) {
 	content := ""
 	switch mode {
 	case MODE_UPPER:
