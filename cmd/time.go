@@ -27,7 +27,7 @@ var nowTimeCmd = &cobra.Command{
 }
 
 var calculateTimeCmd = &cobra.Command{
-	Use: "clac",
+	Use: "calc",
 	Short: "计算所需时间",
 	Long: "计算所需时间",
 	Run: func(cmd *cobra.Command, args []string) {
