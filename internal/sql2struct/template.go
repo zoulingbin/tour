@@ -1,4 +1,4 @@
-package sqi2struct
+package sql2struct
 
 import (
 	"fmt"
