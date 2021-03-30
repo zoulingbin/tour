@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"github.com/zoulingbin/tour/internal/sql2struct"
+	"log"
 )
 
 
@@ -24,7 +25,22 @@ var sql2structCmd = &cobra.Command{
 	Short: "sql转换",
 	Long: "sql转换",
 	Run: func(cmd *cobra.Command, args []string) {
-		//dbInfo := &sql2struct.DBInfo{DBType: dbType,}
+		dbInfo := &sql2struct.DBInfo{DBType: dbType, Host: host, UserName: username, Password: password, Charset: charset}
+		dbModel := sql2struct.NewDBModel(dbInfo)
+		err := dbModel.Connect()
+		if err != nil {
+			log.Fatalf("dbModel.Connect err: %v",err)
+		}
+		column, err := dbModel.GetColumns(dbName, tableName)
+		if err != nil {
+			log.Fatalf("dbModel.GetColumns err:%v",err)
+		}
+		template := sql2struct.NewStructTemplate()
+		templateColumns := template.AssemblyColumns(column)
+		err = template.Generate(tableName, templateColumns)
+		if err != nil {
+			log.Fatalf("template.Generate err: %v", err)
+		}
 	},
 }
 

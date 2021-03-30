@@ -78,7 +78,7 @@ func (m *DBModel) Connect() error {
 /**
 获取表中列的信息
  */
-func (m *DBModel) getColumns(dbName, tableName string) ([]*TableColumn, error){
+func (m *DBModel) GetColumns(dbName, tableName string) ([]*TableColumn, error){
 	query := "SELECT COLUMN_NAME, DATA_TYPE, COLUMN_KEY, " +
 		"IS_NULLABLE, COLUMN_TYPE, COLUMN_COMMENT " +
 		"FROM COLUMNS WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? "
